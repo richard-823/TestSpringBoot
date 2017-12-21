@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dao.StudentMapper">
+    <resultMap type="com.example.model.Student" id="baseResultMap">
+        <!--<constructor>-->
+            <!--<arg column="no" javaType="java.lang.Integer" jdbcType="INTEGER" />-->
+            <!--<arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+            <!--<arg column="age" javaType="java.lang.Integer" jdbcType="INTEGER" />-->
+        <!--</constructor>-->
+    </resultMap>
+    <!-- 查所有数据 -->
+    <select id="listStudents" resultMap="baseResultMap">
+        select * from online_shoppe.student
+    </select>
+    <!-- 插入一条数据 -->
+    <insert id="addStudent" parameterType="com.example.model.Student">
+        insert into online_shoppe.student values(#{no},#{name},#{age})
+    </insert>
+    <!-- 修改一条数据 -->
+    <update id="updateStudent" parameterType="com.example.model.Student">
+        update online_shoppe.student s set s.name=#{name},s.age=#{age} where s.no=#{no}
+    </update>
+    <!-- 删除一条数据 -->
+    <delete id="deleteStudent" parameterType="integer">
+        delete online_shoppe.student s where s.no=#{no}
+    </delete>
+    <!-- 查符合条件的数据 -->
+    <select id="findStudentByNumber" parameterType="integer" resultMap="baseResultMap">
+        select * from online_shoppe.student s where s.no = #{no}
+    </select>
+
+</mapper>
